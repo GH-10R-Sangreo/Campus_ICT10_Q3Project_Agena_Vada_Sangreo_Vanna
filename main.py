@@ -1,69 +1,85 @@
-from pyscript import document
-import random
+from pyscript import display, document
 
-teams = [
-    ("Yellow Tigers", "yellow", "🐯"),
-    ("Blue Bears",    "blue",   "🐻"),
-    ("Red Bulldogs",  "red",    "🐕"),
-    ("Green Hornets", "green",  "🐝"),
-]
+# SIGN UP
+def sign_up(e):
 
-def on_signup(event):
-    # Get registration answer
-    reg_yes = document.querySelector("#reg-yes")
-    reg_no  = document.querySelector("#reg-no")
+    document.getElementById('error').innerHTML = ' '
+    document.getElementById('final').innerHTML = ' '
 
-    # Get medical answer
-    med_yes = document.querySelector("#med-yes")
-    med_no  = document.querySelector("#med-no")
+    username = document.getElementById('user').value
+    password = document.getElementById('pass').value
 
-    # Get grade and section
-    grade_input = document.querySelector("#grade-section").value.strip()
+    if username == "" and password == "":
+        display(f'Please create both username and password.', target='error')
 
-    # Get result box
-    result_box = document.querySelector("#result-box")
+    elif username == "" and password != "":
+        display(f'Please create a username.', target='error')
 
-    # Check if answers were selected
-    reg_answered = reg_yes.checked or reg_no.checked
-    med_answered = med_yes.checked or med_no.checked
+    elif username != "" and password == "":
+        display(f'Please create a password.', target='error')
 
-    # Validate
-    errors = []
+    elif len(username) < 7:
+        display(f'Username must be 7 characters long.', target='error')
 
-    if not reg_answered:
-        errors.append("Please answer Question 1 (Online Registration).")
-    elif reg_no.checked:
-        errors.append("You must complete your online registration first.")
+    elif len(password) < 10:
+        display(f'Password must be 10 characters long.', target='error')
 
-    if not med_answered:
-        errors.append("Please answer Question 2 (Medical Clearance).")
-    elif med_no.checked:
-        errors.append("You must get your medical clearance from the clinic first.")
+    elif not any(c.isalpha() for c in password):
+        display(f'Password must contain at least one (1) letter.', target='error')
 
-    if not grade_input:
-        errors.append("Please enter your Grade and Section.")
+    elif not any(c.isdigit() for c in password):
+        display(f'Password must contain at least one (1) number.', target='error')
 
-    if errors:
-        result_box.className = "error"
-        result_box.style.display = "block"
-        error_html = "<br>".join(f'<p class="error-msg">⚠️ {e}</p>' for e in errors)
-        result_box.innerHTML = error_html
-        return
+    else:
+        display(f'Your account has been made!', target='final')
 
-    # All good — pick a random team
-    team_name, team_color, team_emoji = random.choice(teams)
+# TEAM CHECKER
 
-    result_box.className = "success"
-    result_box.style.display = "block"
-    result_box.innerHTML = f"""
-        <div class="congrats">🎉 Congratulations!</div>
-        <div class="team-message">You have been assigned to...</div>
-        <div class="team-name {team_color}">{team_emoji} {team_name}</div>
-        <div class="team-message" style="margin-top:10px;">
-            Grade &amp; Section: <strong style="color:white;">{grade_input}</strong>
-        </div>
-    """
 
-# Attach the button click event
-btn = document.querySelector("#signup-btn")
-btn.addEventListener("click", on_signup)
+def check_team(e):
+    e.preventDefault()
+
+    document.getElementById('output').innerHTML = ' '
+    document.getElementById('final').innerHTML = ' '
+
+    registration = document.querySelector('input[name="registration"]:checked').value
+    medical = document.querySelector('input[name="medical"]:checked').value
+    sec = document.getElementById("section").value
+
+
+    if registration == "no" and medical == "no":
+        display(f'Oops! Please make sure you have already done the Intramurals Online Registration and have already secured your medical clearance at the clinic before signing up.', target='output')
+    elif registration == "yes" and medical == "no":
+        display(f'Oops! Please make sure you have already secured your medical clearance at the clinic before signing up.', target='output')
+    elif registration == "no" and medical == "yes":
+        display(f'Oops! Please make sure you have already done the Intramurals Online Registration before signing up.', target='output')
+    else:
+        if sec == "e":
+            display(f'Please scroll to the bottom.', target='output')
+            display(f'Congratulations! You are part of the Red Bulldogs.', target='final')
+            document.getElementById('image').innerHTML = "<center><img src='red_bulldogs.jpg' height='200' width='200'><center>"
+        elif sec == "r":
+            display(f'Please scroll to the bottom.', target='output')
+            display(f'Congratulations! You are part of the Blue Bears.', target='final')
+            document.getElementById('image').innerHTML = "<center><img src='blue_bears.jpg' height='200' width='200'><center>"
+        elif sec == "s":
+            display(f'Please scroll to the bottom.', target='output')
+            display(f'Congratulations! You are part of the Green Hornets.', target='final')
+            document.getElementById('image').innerHTML = "<center><img src='green_hornets.jpg' height='200' width='200'><center>"
+        elif sec == "t":
+            display(f'Please scroll to the bottom.', target='output')
+            display(f'Congratulations! You are part of the Yellow Tigers.', target='final')
+            document.getElementById('image').innerHTML = "<center><img src='Yellow_Tigers.jpg' height='200' width='200'><center>"
+
+# LIST OF PLAYERS
+
+
+def list_players(e):
+    e.preventDefault()
+
+    document.getElementById('result').innerHTML = ' '
+        
+    players = ['Agena', 'Ala', 'Baylon', 'Baring', 'Brodhagen', 'Cabatingan', 'Cañete', 'Dimaculangan', 'Evangelista', 'Galang', 'Garabiles', 'Gonzales', 'Jamet', 'Ledesma', 'Nacino', 'Nardo', 'Olmedo', 'Oliveros', 'Ong', 'Rebadulla','Reyes', 'Sangreo', 'Villegas', 'Villafuerte', 'Yao']
+
+    for player in players:
+            display(f'- {player}', target='result')

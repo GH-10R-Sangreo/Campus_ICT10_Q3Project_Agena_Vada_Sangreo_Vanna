@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://pyscript.net/releases/2025.7.3/core.css">
     <script type="module" src="https://pyscript.net/releases/2025.7.3/core.js"></script>
-    <title>Sign Up (Project)</title>
-
+    <title>List of Players (Project)</title>
+    
         <style>
 
             p {
@@ -141,16 +141,6 @@
                 animation: slideDown 1s ease;
             }
 
-            label {
-                font-weight: 500;
-                margin-top: 10px;
-            }
-
-            input, select {
-                border-radius: 8px !important;
-                transition: 0.3s ease;
-            }
-
             input:focus, select:focus {
                 border-color: #2197e7;
                 box-shadow: 0 0 6px #292e5f;
@@ -174,35 +164,12 @@
                 box-shadow: 0 5px 15px #292e5f;
             }
 
-            #error {
-                background-color: #c4f2ff;
-                color: #2197e7;
-                border-radius: 10px;
-                padding: 3px;
-                margin-top: 10px;
-                border-left: 5px solid #2197e7;
-                display: inline-block;
-                opacity: 0;
-                transform: translateY(10px);
-                transition: opacity 0.8s ease, transform 0.8s ease;
-            }
-
             .show {
                 opacity: 1 !important;
                 transform: translateY(0) !important;
             }
 
-            #error {
-                font-size: 1rem;
-                text-align: center;
-                font-weight: bold;
-                padding: 20px;
-                color: #2197e7;
-                background: #c4f2ff;
-                animation: popIn 0.8s ease forwards;
-            }
-
-            #final {
+            #result {
                 font-size: 1.8rem;
                 font-weight: bold;
                 text-align: center;
@@ -224,10 +191,6 @@
                 100% { transform: scale(1); opacity: 1; }
             }
 
-            .image {
-                text-align: center;
-                }
-
             .navbar {
                 background: linear-gradient(90deg, #292e5f, #2197e7);
             }
@@ -244,10 +207,11 @@
             }
 
         </style>
-    </head>
+    
+</head>
 
     <body>
-
+    
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -260,55 +224,40 @@
                 </ul>
             </div>
         </nav>
-    
-    <br>
-    <br>
 
-   <!-- SIGN UP -->
+    <br>
+    <br>
 
     <div class="wrapper">
         <div class="card">
-            <div class="card-header">Create An Account</div>
+            <div class="card-header">List of Players</div>
 
-            <div class="card-body px-4">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label>Username</label>
-                        <input type="text" class="form-control" id="user" placeholder="Create a username">
-                    </div>
-                    <div class="col-md-6">
-                        <label>Password</label>
-                        <input type="text" class="form-control" id="pass" placeholder="Create a password">
-                    </div>   
-                    
-                    <div id="error"></div>
+                <br>
+                <br>
+                
+                  <div id="result"></div>
 
-                    <button class="btn btn-get mt-4" py-click="sign_up">Sign Up</button>
+                    <form>
+                        <div style="text-align:center;">
+                            <button class="btn btn-get mt-4" py-click="list_players" style="width:800px !important;">List Players</button>
+                        </div>
+                    </form>
 
-                </div>
+                <br>
+                <br>
+
             </div>
-        </div>
+        </div>   
+    </div>
 
-    <!-- SIGN UP -->
-    
-    <br>
-    <br>
-    
     <py-script src="main.py"></py-script>
-
-    <div id="final"></div>
-    
-    <br>
-    <br>
-
+                    
     </script>
         <div class="container">
           <p>OB Montessori Center Greenhills Campus</p>
           <p>&copy; VANNA SANGREO</p>
         </div>
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     </body>
 </html>
